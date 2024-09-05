@@ -1,0 +1,41 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+.header .inner-logo img {
+  width: 100px;
+  height: 100px;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+.header .inner-menu ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: end;
+}
+.header .inner-menu ul li {
+  margin-right: 30px;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.product-item .inner-image img {
+  width: 100px;
+  height: 100px;
+}
+.inner-price-new {
+  color: green;
+}
+.inner-price-old {
+  color: red;
+}
+.inner-discount {
+  background-color: red;
+  padding: 5px;
+  color: #fff;
+  display: inline-block;
+}

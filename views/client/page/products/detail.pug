@@ -1,0 +1,41 @@
+extends ../../layout/default.pug
+
+block main 
+  .container.my-3 
+    .row 
+      .col-12 
+        div(class="product-info")
+          h2(class="product-title") Chi tiết sản phẩm
+            if (product.title)
+                div(class="product-row")
+                    span(class="label") Tiêu đề:
+                    h5(class="value") #{product.title}
+            if (product.price)
+                div(class="product-row")
+                    span(class="label") Giá:
+                    h5(class="value")
+                        b #{product.price}$
+            if (product.discountPercentage)
+                div(class="product-row")
+                    span(class="label") Giảm giá:
+                    h5(class="value")
+                        b #{product.discountPercentage}%
+            if (product.stock)
+                div(class="product-row")
+                    span(class="label") Còn lại:
+                    h5(class="value")
+                        b #{product.stock}
+            if (product.thumbnail)
+                div(class="product-row")
+                    span(class="label") Hình ảnh:
+                    span(class="value")
+                        img(src=product.thumbnail style="width: 100px")
+            if (product.position)
+                div(class="product-row")
+                    span(class="label") Vị trí:
+                    h5(class="value")
+                        b #{product.position}
+            if (product.description)
+                div(class="product-row")
+                    span(class="label") Mô tả:
+                    h5(class="value") #{product.description}
