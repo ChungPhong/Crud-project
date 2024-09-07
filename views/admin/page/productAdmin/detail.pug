@@ -43,7 +43,7 @@ block main
     if (product.description)
         div(class="product-row")
             span(class="label") Mô tả:
-            h5(class="value") #{product.description}
+            h5(class="value") !{product.description}
     div(class="product-edit")
       a(
         href=`/admin/products/edit/${product.id}`

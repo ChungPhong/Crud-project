@@ -1,6 +1,7 @@
 require("dotenv").config();
 const database = require("./config/database");
 const express = require("express");
+var path = require("path");
 const route = require("./routes/client/index.route");
 const routeAdmin = require("./routes/admin/indexAdmin.route");
 const methodOverride = require("method-override");
@@ -12,6 +13,12 @@ database.connect();
 const app = express();
 const port = process.env.PORT;
 app.use(methodOverride("_method"));
+
+//TinyMCE
+app.use(
+  "/tinymce",
+  express.static(path.join(__dirname, "node_modules", "tinymce"))
+);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
