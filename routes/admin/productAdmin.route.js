@@ -26,6 +26,7 @@ router.get("/edit/:id", productAdmin.edit);
 router.patch(
   "/edit/:id",
   upload.single("thumbnail"),
+  uploadCloud.upload,
   validate.createPost,
   productAdmin.editPatch
 );
