@@ -1,22 +1,31 @@
 const ProductCategory = require("../../models/product-category.model");
-
+const createTreeHelper = require("../../helpers/createTrees");
 //[GET]Admin/product-category
 module.exports.index = async (req, res) => {
   const find = {
     deleted: false,
   };
+
   const records = await ProductCategory.find(find);
+  const newRecords = createTreeHelper.tree(records);
 
   res.render("admin/page/product-category/index.pug", {
     pageTitle: "Danh mục sản phẩm",
-    records: records,
+    records: newRecords,
   });
 };
 
 //[GET]Admin/product-category/create
 module.exports.create = async (req, res) => {
+  let find = {
+    deleted: false,
+  };
+  const records = await ProductCategory.find(find);
+  const newRecords = createTreeHelper.tree(records);
+
   res.render("admin/page/product-category/create", {
     pageTitle: "Tạo danh mục sản phẩm",
+    records: newRecords,
   });
 };
 

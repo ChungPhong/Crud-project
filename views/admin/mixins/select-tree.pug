@@ -1,0 +1,9 @@
+mixin select-tree(items, level = 1)
+  each item in items
+    - console.log('Item:', item.title, 'Level:', level) // In dữ liệu ra để kiểm tra
+    - const prefix = Array(level + 1).join("-- ")  // Có thể đổi lại ký tự khác
+    - console.log(prefix) // In dữ liệu ra để kiểm tra
+  
+    option(value=item.id) #{prefix}#{item.title}
+    if item.children && item.children.length > 0
+      +select-tree(item.children, level + 1)
