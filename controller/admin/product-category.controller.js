@@ -42,3 +42,41 @@ module.exports.createPost = async (req, res) => {
 
   res.redirect("/admin/products-category");
 };
+//[GET]Admin/product-categorry/edit:id
+module.exports.edit = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await ProductCategory.findOne({
+      deleted: false,
+      _id: id,
+    });
+
+    const records = await ProductCategory.find({
+      deleted: false,
+    });
+    const newRecords = createTreeHelper.tree(records);
+
+    res.render("admin/page/product-category/edit", {
+      pageTitle: "Chỉnh sửa danh mục sản phẩm",
+      data: data,
+      records: newRecords,
+    });
+  } catch (error) {
+    res.redirect("/admin/products-category");
+  }
+};
+
+//[PATCH]Admin/product-categorry/edit:id
+module.exports.editPatch = async (req, res) => {
+  const id = req.params.id;
+  req.body.position = +req.body.position;
+
+  try {
+    await ProductCategory.updateOne({ _id: id }, req.body);
+    req.flash("success", "Cập nhật sản phẩm thành công!");
+    res.redirect("back");
+  } catch (error) {
+    req.flash("error", "Cập nhật sản phẩm thất bại!");
+    res.redirect("back");
+  }
+};

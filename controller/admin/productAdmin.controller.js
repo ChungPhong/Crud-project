@@ -178,9 +178,6 @@ module.exports.editPatch = async (req, res) => {
   req.body.discountPercentage = +req.body.discountPercentage;
   req.body.position = +req.body.position;
 
-  // if (req.file) {
-  //   req.body.thumbnail = `/uploads/${req.file.filename}`;
-  // }
 
   try {
     await Product.updateOne({ _id: id }, req.body);
