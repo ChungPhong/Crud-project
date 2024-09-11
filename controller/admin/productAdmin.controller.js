@@ -136,6 +136,7 @@ module.exports.create = async (req, res) => {
   };
   const category = await ProductCategory.find(find);
   const newRecords = createTreeHelper.tree(category);
+  console.log(">>>>newRecords: ", newRecords);
   res.render("admin/page/productAdmin/create", {
     pageTitle: "Thêm mới sản phẩm",
     category: newRecords,
@@ -161,7 +162,7 @@ module.exports.createPost = async (req, res) => {
   res.redirect("/admin/products");
 };
 
-//[GET]Admin/product/edit
+//[GET]Admin/product/edit/:id
 module.exports.edit = async (req, res) => {
   try {
     const find = {
@@ -169,10 +170,14 @@ module.exports.edit = async (req, res) => {
       _id: req.params.id,
     };
     const product = await Product.findOne(find);
-
+    const category = await ProductCategory.find({
+      deleted: false,
+    });
+    const newRecords = createTreeHelper.tree(category);
     res.render("admin/page/productAdmin/edit", {
       pageTitle: "Chỉnh sửa sản phẩm",
       product: product,
+      category: newRecords,
     });
   } catch (error) {
     res.redirect("/admin/products/");
