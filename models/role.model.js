@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const customer = new mongoose.Schema(
   {
-    title: String, 
+    title: String,
     description: String,
     permissions: {
-        type: Array,
-        default: []
+      type: Array,
+      default: [],
     },
     deleted: {
       type: Boolean,
@@ -20,4 +20,4 @@ const customer = new mongoose.Schema(
 );
 const Role = mongoose.model("Role", customer, "roles");
 
-module.exports = Product;
+module.exports = Role;
