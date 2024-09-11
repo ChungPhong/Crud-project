@@ -30,6 +30,12 @@ ul {
   top: 56px;
   left: 0;
 }
+.body .sider .inner-menu ul li {
+  padding-bottom: 20px;
+}
+.body .sider .inner-menu ul li :hover {
+  text-decoration: underline;
+}
 .main {
   padding: 70px;
   position: relative;

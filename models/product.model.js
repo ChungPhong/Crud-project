@@ -10,6 +10,10 @@ const customer = new mongoose.Schema(
     stock: Number,
     thumbnail: String,
     position: Number,
+    product_category_id: {
+      type: String,
+      default: "",
+    },
     slug: {
       type: String,
       slug: "title", //san-pham-1

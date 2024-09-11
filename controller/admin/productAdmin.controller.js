@@ -3,6 +3,8 @@ const filterStatusHelpers = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
 const paginationHelpers = require("../../helpers/pagination");
 const mongoose = require("mongoose");
+const createTreeHelper = require("../../helpers/createTrees");
+const ProductCategory = require("../../models/product-category.model");
 
 //[GET]Admin/product
 module.exports.index = async (req, res) => {
@@ -35,7 +37,7 @@ module.exports.index = async (req, res) => {
   //Sort
   let sort = {};
   if (req.query.sortKey && req.query.sortValue) {
-    sort[req.query.sortKey] = req.query.sortValue
+    sort[req.query.sortKey] = req.query.sortValue;
   } else {
     sort.position = "desc";
   }
@@ -127,9 +129,16 @@ module.exports.deleteItem = async (req, res) => {
 };
 
 //[GET]Admin/product/create
+
 module.exports.create = async (req, res) => {
+  let find = {
+    deleted: false,
+  };
+  const category = await ProductCategory.find(find);
+  const newRecords = createTreeHelper.tree(category);
   res.render("admin/page/productAdmin/create", {
     pageTitle: "Thêm mới sản phẩm",
+    category: newRecords,
   });
 };
 
@@ -177,7 +186,6 @@ module.exports.editPatch = async (req, res) => {
   req.body.stock = +req.body.stock;
   req.body.discountPercentage = +req.body.discountPercentage;
   req.body.position = +req.body.position;
-
 
   try {
     await Product.updateOne({ _id: id }, req.body);
