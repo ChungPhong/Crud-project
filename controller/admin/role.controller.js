@@ -28,7 +28,7 @@ module.exports.create = async (req, res) => {
 // [GET]Admin/role/create
 module.exports.createPost = async (req, res) => {
   const record = new Role(req.body);
-  // console.log(req.body);
+
   await record.save();
   res.redirect("/admin/roles");
 };
@@ -56,5 +56,29 @@ module.exports.editPatch = async (req, res) => {
   } catch (error) {
     req.flash("error", "Cập nhật sản phẩm thất bại!");
     res.redirect("back");
+  }
+};
+// [GET]Admin/role/permissions
+module.exports.permissions = async (req, res) => {
+  let find = {
+    deleted: false,
+  };
+  const records = await Role.find(find);
+  res.render("admin/page/role/permissions", {
+    pageTitle: "Phân quyền",
+    records: records,
+  });
+};
+// [PATCH]Admin/role/permissions
+module.exports.permissionsPatch = async (req, res) => {
+  try {
+    const permissions = JSON.parse(req.body.permissions);
+    for (const item of permissions) {
+      await Role.updateOne({ _id: item.id }, { permissions: item.permissions });
+    }
+    req.flash("success", "Cập nhật phân quyền thành công!");
+    res.redirect("back");
+  } catch (error) {
+    req.flash("error", "Cập nhật phân quyền thất bại!");
   }
 };
