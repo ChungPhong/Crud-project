@@ -95,8 +95,7 @@ module.exports.changeMulti = async (req, res) => {
       for (const item of ids) {
         let [id, position] = item.split("-");
         position = parseInt(position);
-        console.log(id);
-        console.log(position);
+
         await Product.updateOne(
           { _id: id },
           {
@@ -129,14 +128,14 @@ module.exports.deleteItem = async (req, res) => {
 };
 
 //[GET]Admin/product/create
-
 module.exports.create = async (req, res) => {
   let find = {
     deleted: false,
   };
   const category = await ProductCategory.find(find);
+
   const newRecords = createTreeHelper.tree(category);
-  console.log(">>>>newRecords: ", newRecords);
+
   res.render("admin/page/productAdmin/create", {
     pageTitle: "Thêm mới sản phẩm",
     category: newRecords,
@@ -157,8 +156,8 @@ module.exports.createPost = async (req, res) => {
   }
 
   const product = new Product(req.body);
+  console.log(product);
   await product.save();
-  console.log(req.body);
   res.redirect("/admin/products");
 };
 
@@ -209,8 +208,6 @@ module.exports.detail = async (req, res) => {
       _id: req.params.id,
     };
     const product = await Product.findOne(find);
-    console.log(product);
-
     res.render("admin/page/productAdmin/detail", {
       pageTitle: product.title,
       product: product,
