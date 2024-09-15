@@ -8,6 +8,7 @@ const customer = new mongoose.Schema(
     price: Number,
     discountPercentage: Number,
     stock: Number,
+    status: String,
     thumbnail: String,
     position: Number,
     product_category_id: {
@@ -22,7 +23,7 @@ const customer = new mongoose.Schema(
     createdBy: {
       account_id: String,
       createdAt: {
-        type: String,
+        type: Date,
         default: Date.now,
       },
     },
@@ -30,8 +31,11 @@ const customer = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    status: String,
     deletedAt: Date,
+    deletedBy: {
+      account_id: String,
+      deletedAt: Date,
+    },
   },
   {
     timestamps: true,
