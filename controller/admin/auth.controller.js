@@ -2,10 +2,14 @@ const Account = require("../../models/account.model");
 const Role = require("../../models/role.model");
 const md5 = require("md5");
 //[GET]Admin/auth/login
-module.exports.login = (req, res) => {
-  res.render("admin/page/auth/login", {
-    pageTitle: "Trang đăng nhập",
-  });
+module.exports.login = async (req, res) => {
+  if (req.cookies.token) {
+    res.redirect("/admin/dashboard");
+  } else {
+    res.render("admin/page/auth/login", {
+      pageTitle: "Trang đăng nhập",
+    });
+  }
 };
 //[POST]Admin/auth/login
 module.exports.loginPost = async (req, res) => {
