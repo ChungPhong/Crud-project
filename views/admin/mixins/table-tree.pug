@@ -21,29 +21,31 @@ mixin table-tree(items, level = 1)
           name="position"    
         )
       td
-        if (item.status == "active")
-          a(
-            href="javascript:;" class="badge text-bg-success"
-            data-status=item.status
-            data-id=item.id
-            button-change-status
-          ) Hoạt động
-        else
-          a(
-            href="javascript:;" class="badge text-bg-danger"
-            data-status=item.status
-            data-id=item.id
-            button-change-status
-          ) Dừng hoạt động
+        if(role.permissions.includes("products-category_edit"))
+          if (item.status == "active")
+            a(
+              href="javascript:;" class="badge text-bg-success"
+              data-status=item.status
+              data-id=item.id
+              button-change-status
+            ) Hoạt động
+          else
+            a(
+              href="javascript:;" class="badge text-bg-danger"
+              data-status=item.status
+              data-id=item.id
+              button-change-status
+            ) Dừng hoạt động
       td
         a(
           href=`/admin/products-category/detail/${item.id}`
           class="btn btn-secondary btn-sm"
         ) Chi tiết
-        a(
-          href=`/admin/products-category/edit/${item.id}`
-          class="btn btn-warning btn-sm"
-        ) Sửa
+        if(role.permissions.includes("products-category_edit"))
+          a(
+            href=`/admin/products-category/edit/${item.id}`
+            class="btn btn-warning btn-sm"
+          ) Sửa
         button(
           class="btn btn-danger btn-sm ml-1"
           button-delete

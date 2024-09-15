@@ -45,8 +45,9 @@ block main
             span(class="label") Mô tả:
             h5(class="value") !{product.description}
     div(class="product-edit")
-      a(
-        href=`/admin/products/edit/${product.id}`
-        class="btn btn-warning btn-sm"
-      ) Chỉnh Sửa 
+      if(role.permissions.includes("products_edit"))
+        a(
+          href=`/admin/products/edit/${product.id}`
+          class="btn btn-warning btn-sm"
+        ) Chỉnh Sửa 
   script(src="/admin/js/product.js") 
