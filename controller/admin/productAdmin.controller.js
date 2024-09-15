@@ -5,6 +5,7 @@ const paginationHelpers = require("../../helpers/pagination");
 const mongoose = require("mongoose");
 const createTreeHelper = require("../../helpers/createTrees");
 const ProductCategory = require("../../models/product-category.model");
+const Account = require("../../models/account.model");
 
 //[GET]Admin/product
 module.exports.index = async (req, res) => {
@@ -45,6 +46,15 @@ module.exports.index = async (req, res) => {
     .sort(sort)
     .limit(objectPagination.limitPage)
     .skip(objectPagination.skip);
+
+  for (const product of products) {
+    const user = await Account.findOne({
+      _id: product.createdBy.account_id,
+    });
+    if (user) {
+      product.accountFullName = user.fullName;
+    }
+  }
 
   res.render("admin/page/productAdmin/index", {
     pageTitle: "Trang sản phẩm",
@@ -154,7 +164,9 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = +req.body.position;
   }
-
+  req.body.createdBy = {
+    account_id: res.locals.user.id,
+  };
   const product = new Product(req.body);
   console.log(product);
   await product.save();

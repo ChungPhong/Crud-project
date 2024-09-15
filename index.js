@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const moment = require("moment");
 const flash = require("express-flash");
 database.connect();
 const app = express();
@@ -19,6 +20,9 @@ app.use(
   "/tinymce",
   express.static(path.join(__dirname, "node_modules", "tinymce"))
 );
+
+//App Locas
+app.locals.moment = moment;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

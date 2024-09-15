@@ -19,6 +19,13 @@ const customer = new mongoose.Schema(
       slug: "title", //san-pham-1
       unique: true,
     },
+    createdBy: {
+      account_id: String,
+      createdAt: {
+        type: String,
+        default: Date.now,
+      },
+    },
     deleted: {
       type: Boolean,
       default: false,
