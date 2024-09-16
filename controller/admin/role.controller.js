@@ -7,7 +7,6 @@ module.exports.index = async (req, res) => {
   };
 
   const records = await Role.find(find);
-  console.log(records);
   res.render("admin/page/role/index", {
     pageTitle: "Trang trủ",
     records: records,

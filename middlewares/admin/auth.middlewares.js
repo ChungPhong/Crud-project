@@ -15,7 +15,6 @@ module.exports.requireAuth = async (req, res, next) => {
         _id: user.role_id,
       }).select("title permissions");
       res.locals.user = user;
-      console.log(res.locals.user);
       res.locals.role = role;
       next();
     }

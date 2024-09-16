@@ -12,7 +12,7 @@ module.exports.index = async (req, res) => {
       deleted: false,
       _id: record.role_id,
     });
-    record.role = role;
+    record.role = role.title;
   }
 
   res.render("admin/page/accounts/index", {
@@ -44,7 +44,6 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.password = md5(req.body.password);
     const record = new Account(req.body);
-    console.log(record);
     await record.save();
     res.redirect("/admin/accounts");
   }
@@ -77,7 +76,7 @@ module.exports.editPatch = async (req, res) => {
   const id = req.params.id;
 
   const emailExist = await Account.findOne({
-    _id: {$ne: id},
+    _id: { $ne: id },
     email: req.body.email,
     deleted: false,
   });
