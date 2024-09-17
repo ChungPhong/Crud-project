@@ -9,6 +9,7 @@ const customer = new mongoose.Schema(
     discountPercentage: Number,
     stock: Number,
     status: String,
+    featured: String,
     thumbnail: String,
     position: Number,
     product_category_id: {

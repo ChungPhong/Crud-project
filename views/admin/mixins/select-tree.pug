@@ -1,9 +1,6 @@
 mixin select-tree(items, level = 1, parent_id = "")
   each item in items
-    - console.log('Item:', item.title, 'Level:', level) // In dữ liệu ra để kiểm tra
     - const prefix = Array(level + 1).join("-- ")  // Có thể đổi lại ký tự khác
-    - console.log(prefix) // In dữ liệu ra để kiểm tra
-  
     option(
       selected=(item.id == parent_id ? true : false)
       value=item.id
