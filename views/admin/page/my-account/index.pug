@@ -1,0 +1,36 @@
+extends ../../layout/default.pug
+
+block main
+  div(class="product-info")
+    h2(class="product-title") Thông tin cá nhân
+    if (user.avatar)
+        div(class="product-row")
+            span(class="label") Hình ảnh:
+            span(class="value")
+                img(src=user.avatar style="width: 100px; height: 100px")
+    if (user.fullName)
+        div(class="product-row")
+            span(class="label") Họ tên: 
+            h5(class="value") #{user.fullName}
+    if (user.email)
+        div(class="product-row")
+            span(class="label") Email: 
+            h5(class="value") #{user.email}
+    if (user.phone)
+        div(class="product-row")
+            span(class="label") Phone: 
+            h5(class="value") #{user.phone}
+    if (user.status)
+        div(class="product-row")
+            span(class="label") Trạng thái: 
+            h5(class="value") #{user.status == "active" ? "Hoạt động" : "Dừng hoạt động" }
+    if (role.title)
+        div(class="product-row")
+            span(class="label") Phân quyền: 
+            h5(class="value") #{role.title}
+    div(class="product-edit")
+        a(
+          href="/admin/my-account/edit"
+          class="btn btn-warning btn-sm"
+        ) Chỉnh Sửa 
+    
