@@ -6,12 +6,22 @@ module.exports.index = async (req, res) => {
     featured: "1",
     deleted: false,
     status: "active",
-  }).limit(4);
+  }).limit(6);
 
-  const newProducts = productsHelper.priceNewProducts(productsFeatured);
+  const newProductsFeatured = productsHelper.priceNewProducts(productsFeatured);
+
+  // Lấy ra sản phẩm mới nhất
+  const productsNew = await Product.find({
+    deleted: false,
+    status: "active",
+  })
+    .sort({ position: "desc" })
+    .limit(4);
+  const newProductsNew = productsHelper.priceNewProducts(productsNew);
 
   res.render("client/page/home/index", {
     pageTitle: "Trang trủ",
-    productsFeatured: newProducts,
+    productsFeatured: newProductsFeatured,
+    productsNew: newProductsNew,
   });
 };
