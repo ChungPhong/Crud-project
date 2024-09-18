@@ -1,4 +1,5 @@
 const Product = require("../../models/product.model");
+const productsHelper = require("../../helpers/product");
 
 //[GET] /products
 module.exports.index = async (req, res) => {
@@ -6,20 +7,14 @@ module.exports.index = async (req, res) => {
     status: "active",
     deleted: false,
   }).sort({ position: "desc" });
-  const newProducts = products.forEach((item) => {
-    item.priceNew = (
-      (item.price * (100 - item.discountPercentage)) /
-      100
-    ).toFixed(0);
-    return item;
-  });
+  const newProducts = productsHelper.priceNewProducts(products);
 
   res.render("client/page/products/index", {
     pageTitle: "Danh sách sản phẩm",
-    newProducts: products,
-  });
+    products: newProducts,
+  }); 
 };
-
+ 
 //[GET] /products/:slug
 module.exports.detail = async (req, res) => {
   try {
@@ -37,7 +32,7 @@ module.exports.detail = async (req, res) => {
   } catch (error) {
     res.redirect("/products");
   }
- 
+
   // res.render("client/page/products/detail", {
   //   pageTitle: "Chi tiết sản phẩm",
   // });

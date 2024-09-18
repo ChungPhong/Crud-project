@@ -23,6 +23,8 @@ a {
 .product-item {
   border: 1px solid #ddd;
   text-align: center;
+  height: 100%;
+  padding: 20px 0;
 }
 .product-item .inner-image img {
   width: 100px;
