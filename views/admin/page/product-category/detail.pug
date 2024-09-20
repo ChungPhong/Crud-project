@@ -1,0 +1,35 @@
+extends ../../layout/default.pug
+
+block main
+  div(class="product-info")
+    h2(class="product-title") Chi tiết sản phẩm
+    if (records.title)
+        div(class="product-row")
+            span(class="label") Tiêu đề:
+            h5(class="value") #{records.title}
+    if (records.status)
+        div(class="product-row")
+            span(class="label") Trạng thái:
+            h5(class="value")
+                b #{records.status}
+    if (records.thumbnail)
+        div(class="product-row")
+            span(class="label") Hình ảnh:
+            span(class="value")
+                img(src=records.thumbnail style="width: 100px")
+    if (records.position)
+        div(class="product-row")
+            span(class="label") Vị trí:
+            h5(class="value")
+                b #{records.position}
+    if (records.description)
+        div(class="product-row")
+            span(class="label") Mô tả:
+            h5(class="value") !{records.description}
+    div(class="product-edit")
+      if(role.permissions.includes("products_edit"))
+        a(
+          href=`/admin/products-category/edit/${records.id}`
+          class="btn btn-warning btn-sm"
+        ) Chỉnh Sửa 
+  script(src="/admin/js/product-category.js") 

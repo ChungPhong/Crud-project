@@ -27,5 +27,7 @@ router.patch(
   uploadCloud.upload,
   productCategory.editPatch
 );
+router.get("/detail/:id", productCategory.detail);
+router.delete("/delete/:id/", productCategory.deleteItem);
 
 module.exports = router;

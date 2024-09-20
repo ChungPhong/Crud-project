@@ -51,5 +51,11 @@ mixin table-tree(items, level = 1)
           button-delete
           data-id=item.id
         ) Xóa
-    if item.children && item.children.length > 0
+    if(item.children && item.children.length > 0)
       +table-tree(item.children, level + 1)
+    form(
+      action=""
+      method="POST"
+      id="form-delete-item"
+      data-path="/admin/products-category/delete"
+    )

@@ -90,3 +90,38 @@ module.exports.editPatch = async (req, res) => {
     res.redirect("back");
   }
 };
+
+//[PATCH]Admin/product-categorry/detail:id
+module.exports.detail = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id,
+    };
+    const records = await ProductCategory.findOne(find);
+    res.render("admin/page/product-category/detail", {
+      pageTitle: "Thông tin sản phẩm sản phẩm",
+      records: records,
+    });
+  } catch (error) {
+    res.redirect("/admin/products-category/");
+  }
+};
+
+//[DELETE]Admin/product/delete:id
+module.exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+  // await Product.deleteOne({ _id: id }); Xóa cứng
+  await ProductCategory.updateOne(
+    { _id: id },
+    {
+      deleted: true,
+      deletedBy: {
+        account_id: res.locals.user.id,
+        deletedAt: new Date(),
+      },
+    }
+  );
+
+  res.redirect("back");
+};
