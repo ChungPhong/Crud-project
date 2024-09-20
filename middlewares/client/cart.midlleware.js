@@ -14,14 +14,15 @@ module.exports.cartId = async (req, res, next) => {
     });
   } else {
     //Khi đã có giỏ hàng
+    const cart = await Cart.findOne({
+      _id: req.cookies.cartId,
+    });
+    cart.totalQuantity = cart.products.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    );
+    res.locals.miniCart = cart;
   }
 
-  //   let find = {
-  //     deleted: false,
-  //   };
-  //   const productCategory = await ProductCategory.find(find);
-  //   const newProductCategory = createTreeHelper.tree(productCategory);
-
-  //   (res.locals.layoutProductCategory = newProductCategory), next();
   next();
 };
