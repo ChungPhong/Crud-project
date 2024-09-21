@@ -82,7 +82,6 @@ module.exports.delete = async (req, res) => {
   const productId = req.params.productId;
   const cartId = req.cookies.cartId;
 
-  console.log(">>>productId: ", productId);
   await Cart.updateOne(
     {
       _id: cartId,
@@ -101,7 +100,6 @@ module.exports.update = async (req, res) => {
   const cartId = req.cookies.cartId;
   const quantity = req.params.quantity;
 
-  console.log(">>>productId: ", productId);
   await Cart.updateOne(
     {
       _id: cartId,
@@ -114,3 +112,5 @@ module.exports.update = async (req, res) => {
   req.flash("success", "Đã cập nhật số lượng");
   res.redirect("back");
 };
+
+
