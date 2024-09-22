@@ -1,6 +1,7 @@
 const User = require("../../models/user.model");
 const ForgotPassword = require("../../models/forgot-password.model");
 const generateHelper = require("../../helpers/generate");
+const sendMailHelper = require("../../helpers/sendMail");
 const md5 = require("md5");
 //[GET] /user/register
 module.exports.register = async (req, res) => {
@@ -86,6 +87,7 @@ module.exports.forgotPasswordPost = async (req, res) => {
     email: email,
     deleted: false,
   });
+  console.log(email);
   if (!user) {
     req.flash("error", "Email không tồn tại!");
     return res.render("client/page/user/forgot-password", {
@@ -94,15 +96,22 @@ module.exports.forgotPasswordPost = async (req, res) => {
   }
   //Nếu có email thì ta có 2 việc phải làm
   //Việc 1: Là tạo mã OTP và lưu thông tin yêu cầu vào collection forgot-password
-  const otp = generateHelper.generateRandomNumber(8);
+  const otp = generateHelper.generateRandomNumber(4);
   const objectForgotPassword = {
     email: email,
     otp: otp,
     expireAt: Date.now(),
   };
+
   const forgotPassword = new ForgotPassword(objectForgotPassword);
   await forgotPassword.save();
   //Việc 2: Gửi mã OTP qua email của user
+  const subject = `Mã OTP xác minh lấy lại mật khẩu`;
+  const html = `Mã OTP xác minh lấy lại mật khẩu là
+  <b>${otp}</b>. Thời hạn sử dụng là 1 phút. Lưu ý không được chia sẻ mã OTP
+  `;
+
+  sendMailHelper.sendMail(email, subject, html);
   res.redirect(`/user/password/otp?email=${email}`);
 };
 
@@ -115,14 +124,10 @@ module.exports.otpPassword = async (req, res) => {
   });
 };
 
-//[GET] /user/password/otp
+//[POST] /user/password/otp
 module.exports.otpPasswordPost = async (req, res) => {
   const email = req.body.email;
   const otp = +req.body.otp;
-  console.log({
-    email: email,
-    otp: otp,
-  });
   const result = await ForgotPassword.findOne({
     email: email,
     otp: otp,
@@ -136,6 +141,31 @@ module.exports.otpPasswordPost = async (req, res) => {
     email: email,
   });
   res.cookie("tokenUser", user.tokenUser);
-  
+
   res.redirect("/user/password/reset");
+};
+
+//[GET] /user/password/reset
+module.exports.resetPassword = async (req, res) => {
+  res.render("client/page/user/reset-password", {
+    pageTitle: "Đổi mật khẩu",
+  });
+};
+
+//[POST] /user/password/reset
+module.exports.resetPasswordPost = async (req, res) => {
+  const password = req.body.password;
+  const tokenUser = req.cookies.tokenUser;
+
+  await User.updateOne(
+    {
+      tokenUser: tokenUser,
+    },
+    {
+      password: md5(password),
+    }
+  );
+
+  req.flash("success", "Đổi mật khẩu thành công!");
+  res.redirect("back");
 };
