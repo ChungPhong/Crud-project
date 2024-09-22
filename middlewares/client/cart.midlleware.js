@@ -2,8 +2,6 @@ const Cart = require("../../models/cart.model");
 const ProductCategory = require("../../models/product-category.model");
 
 module.exports.cartId = async (req, res, next) => {
-  console.log(req.cookies.cartId);
-
   if (!req.cookies.cartId) {
     const cart = new Cart();
     await cart.save();
