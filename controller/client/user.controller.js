@@ -169,3 +169,10 @@ module.exports.resetPasswordPost = async (req, res) => {
   req.flash("success", "Đổi mật khẩu thành công!");
   res.redirect("back");
 };
+
+//[GET] /user/info
+module.exports.info = async (req, res) => {
+  res.render("client/page/user/info", {
+    pageTitle: "Thông tin tài khoản",
+  });
+};

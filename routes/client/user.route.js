@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const validate = require("../../validates/client/user.validate");
 const controller = require("../../controller/client/user.controller");
+const authMiddleware = require("../../middlewares/client/auth.middlewares");
 
 router.get("/register", controller.register);
 router.post("/register", validate.registerPost, controller.registerPost);
@@ -22,5 +23,6 @@ router.post(
   validate.resetPasswordPost,
   controller.resetPasswordPost
 );
+router.get("/info", authMiddleware.requireAuth, controller.info);
 
 module.exports = router;
