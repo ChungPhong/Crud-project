@@ -7,6 +7,11 @@ const md5 = require("md5");
 
 //[GET] /chat/
 module.exports.index = async (req, res) => {
+  // SocketIo
+  _io.on("connection", (socket) => {
+    console.log("a user connected", socket.id);
+  });
+  // SocketIo
   res.render("client/page/chat/index", {
     pageTitle: "Chat",
   });

@@ -11,8 +11,6 @@ const session = require("express-session");
 const moment = require("moment");
 const flash = require("express-flash");
 const http = require("http");
-const { createServer } = require("node:http");
-
 const { Server } = require("socket.io");
 
 database.connect();
@@ -35,11 +33,9 @@ app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 //socketIo
-const server = createServer(app);
+const server = http.createServer(app);
 const io = new Server(server);
-io.on("connection", (socket) => {
-  console.log("a user connected", socket.id);
-});
+global._io = io;
 
 //Flash
 app.use(cookieParser("ABPOIWNNOS2D"));
