@@ -175,3 +175,120 @@ a {
     display: none;
   }
 }
+
+/* chat  */
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.chat {
+  width: 400px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.inner-body {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.inner-incoming,
+.inner-outgoing {
+  display: flex;
+  flex-direction: column; /* Stack the content in a column */
+  align-items: flex-start; /* Align items to the start */
+  margin-bottom: 15px;
+}
+
+.inner-incoming .inner-content {
+  background-color: #f1f0f0;
+  color: #000;
+  padding: 10px;
+  border-radius: 15px;
+  border-bottom-left-radius: 0;
+  max-width: 80%;
+}
+
+.inner-outgoing .inner-content {
+  background-color: #ff7eb8;
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+  border-bottom-right-radius: 0;
+  max-width: 80%;
+  margin-left: auto;
+}
+
+.inner-incoming .inner-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.inner-incoming .inner-content::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #f1f0f0;
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+.inner-outgoing .inner-content::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #ff7eb8;
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+/* Input and send button styling */
+.inner-foot {
+  display: flex;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+  position: relative;
+}
+
+.inner-form input {
+  width: 140%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+.inner-form button {
+  color: #ff7eb8;
+  cursor: pointer;
+  padding-left: 10px;
+  position: absolute;
+  top: 9px;
+  right: 36px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.inner-form button i {
+  font-size: 18px;
+}
+
+/* chat  */
