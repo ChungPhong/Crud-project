@@ -10,6 +10,11 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const moment = require("moment");
 const flash = require("express-flash");
+const http = require("http");
+const { createServer } = require("node:http");
+
+const { Server } = require("socket.io");
+
 database.connect();
 const app = express();
 const port = process.env.PORT;
@@ -29,6 +34,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
+//socketIo
+const server = createServer(app);
+const io = new Server(server);
+io.on("connection", (socket) => {
+  console.log("a user connected", socket.id);
+});
+
 //Flash
 app.use(cookieParser("ABPOIWNNOS2D"));
 app.use(session({ cookie: { maxAge: 60000 } }));
@@ -45,6 +57,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
