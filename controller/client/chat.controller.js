@@ -9,6 +9,7 @@ const Chat = require("../../models/chat.model");
 //[GET] /chat/
 module.exports.index = async (req, res) => {
   const userId = res.locals.user.id;
+  const fullName = res.locals.user.fullName;
 
   // SocketIo once là kết nối 1 lần duy nhất
   _io.once("connection", (socket) => {
@@ -19,6 +20,13 @@ module.exports.index = async (req, res) => {
         content: content,
       });
       await chat.save();
+
+      //Trả data về client
+      _io.emit("SERVER_RETURN_MESSAGE", {
+        userId: userId,
+        fullName: fullName,
+        content: content,
+      });
     });
   });
   // end SocketIo
