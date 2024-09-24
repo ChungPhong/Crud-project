@@ -36,8 +36,14 @@ app.use(flash());
 
 app.use(express.static(`${__dirname}/public`));
 
+//Routes
 routeAdmin(app);
 route(app);
+app.get("*", (req, res) => {
+  res.render("client/page/errors/404", {
+    pageTitle: "404 Not Found",
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
