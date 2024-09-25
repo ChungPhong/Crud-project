@@ -277,7 +277,7 @@ body {
   padding-left: 10px;
   position: absolute;
   top: 9px;
-  right: 36px;
+  right: -8px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -290,5 +290,26 @@ body {
 .inner-form button i {
   font-size: 18px;
 }
-
+span.button-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
+  top: 8px;
+  right: 40px;
+  position: absolute;
+  cursor: pointer;
+}
 /* chat  */
+/* emoji-picker  */
+
+.tooltip {
+  visibility: hidden;
+}
+.tooltip.shown {
+  visibility: visible;
+  opacity: 1;
+}
+/* emoji-picker  */
