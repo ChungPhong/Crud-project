@@ -18,21 +18,8 @@ block main
               div(class=(chat.infoUser.id == user.id ? "inner-outgoing" : "inner-incoming"))
                 .inner-name #{chat.infoUser.fullName}
                 .inner-content
-                  | #{chat.content}
-              //- .inner-outgoing
-              //-   .inner-content
-              //-     | Thế à? Ok e iu
-              //- .inner-incoming
-              //-   .inner-name #{chat.infoUser.fullName}
-              //-   .inner-content
-              //-     | #{chat.content}
-              //- .inner-outgoing
-              //-   .inner-content
-              //-     | Ck đến rồi mà thấy ai ở nhà đâu e? Khóa cửa mà :(
-              //- .inner-incoming
-              //-   .inner-name Em Yêu
-              //-   .inner-content
-              //-     | Thì em bảo nhà e không ai ở nhà mà :v
+                  | #{chat.content} 
+            div(class="inner-list-typing")
           .inner-foot 
             form(
               class="inner-form"
