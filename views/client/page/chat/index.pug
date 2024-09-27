@@ -16,8 +16,13 @@ block main
             each chat in chats
               div(class=(chat.infoUser.id == user.id ? "inner-outgoing" : "inner-incoming"))
                 .inner-name #{chat.infoUser.fullName}
-                .inner-content
-                  | #{chat.content} 
+                if(chat.content)
+                  .inner-content
+                    | #{chat.content} 
+                if(chat.images)
+                .inner-images
+                  each image in chat.images
+                    img(src=image)
             div(class="inner-list-typing")
           .inner-foot 
             form(
