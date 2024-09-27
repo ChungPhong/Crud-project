@@ -24,6 +24,9 @@ block main
                   each image in chat.images
                     img(src=image)
             div(class="inner-list-typing")
+
+          .inner-preview-images 
+            div(class="custom-file-container" data-upload-id="upload-image") 
           .inner-foot 
             form(
               class="inner-form"
@@ -34,7 +37,10 @@ block main
                 placeholder="Nhập nội dung..."
                 name="content"
               )
-              div(class="custom-file-container" data-upload-id="upload-image") 
+              label(
+                class="button-image"
+                for="file-upload-with-preview-upload-image"
+              ) <i class="fa-solid fa-image"></i>
               span(class="button-icon") 
                 i.fa-solid.fa-face-smile
               button 

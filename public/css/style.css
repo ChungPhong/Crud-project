@@ -243,7 +243,7 @@ body {
   left: 20px;
 }
 
-.inner-outgoing .inner-content::before {
+/* .inner-outgoing .inner-content::before {
   content: "";
   width: 0;
   height: 0;
@@ -253,7 +253,7 @@ body {
   position: absolute;
   top: 0;
   right: 20px;
-}
+} */
 
 /* Input and send button styling */
 .inner-foot {
@@ -264,7 +264,7 @@ body {
 }
 
 .inner-form input {
-  width: 140%;
+  width: 190%;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -301,6 +301,7 @@ span.button-icon {
   right: 40px;
   position: absolute;
   cursor: pointer;
+  font-size: 20px;
 }
 .chat .inner-body .inner-images img {
   width: 80px;
@@ -321,6 +322,36 @@ span.button-icon {
   margin: 0 0 5px 5px;
 }
 
+.chat .inner-preview-images {
+  position: relative;
+}
+
+.chat .inner-preview-images .label-container {
+  display: none;
+}
+
+.chat .inner-preview-images .input-container {
+  display: none;
+}
+
+.chat .inner-preview-images .image-preview {
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+}
+
+.chat .inner-preview-images .image-preview-item {
+  width: 90px;
+  background-size: contain;
+}
+
+i.fa-solid.fa-image {
+  position: absolute;
+  top: 18px;
+  right: 93px;
+  font-size: 22px;
+  cursor: pointer;
+}
 /*END  chat  */
 /* emoji-picker  */
 
