@@ -4,7 +4,6 @@ include ../../mixins/product-layout.pug
 include ../../mixins/alert.pug
 
 block main 
-  div #{chats}
   +alert-success(2000)
   .container.my-3
     .row
@@ -30,9 +29,14 @@ block main
                 placeholder="Nhập nội dung..."
                 name="content"
               )
+              div(class="custom-file-container" data-upload-id="upload-image") 
               span(class="button-icon") 
                 i.fa-solid.fa-face-smile
               button 
                 i.fa-solid.fa-paper-plane
   div(class="tooltip light" role="tooltip")
     emoji-picker(class="light")
+   
+
+
+
