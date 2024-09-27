@@ -320,6 +320,7 @@ span.button-icon {
 
 .chat .inner-body .inner-outgoing .inner-images img {
   margin: 0 0 5px 5px;
+  cursor: pointer;
 }
 
 .chat .inner-preview-images {
