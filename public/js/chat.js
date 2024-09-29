@@ -18,7 +18,7 @@ if (formSendData) {
     const images = upload.cachedFileArray || [];
 
     if (content || images.length > 0) {
-      //Gửi ảnh lên sẽ bị lỗi
+
       socket.emit("CLIENT_SEND_MESSAGE", {
         content: content,
         images: images,

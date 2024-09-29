@@ -7,10 +7,18 @@ const customer = new mongoose.Schema(
     password: String,
     tokenUser: {
       type: String,
-      default: generate.generateRandomString(20),
+      default: () => generate.generateRandomString(20),
     },
     phone: String,
     avatar: String,
+    friendList: [
+      {
+        user_id: String,
+        room_chat_id: String,
+      },
+    ],
+    acceptFriends: Array, //Ngươi gửi kết bạn
+    requestFriends: Array, //Người nhận kb
     status: {
       default: "active",
       type: String,
