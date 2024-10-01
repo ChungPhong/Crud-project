@@ -19,6 +19,7 @@ const customer = new mongoose.Schema(
     ],
     acceptFriends: Array, //Ngươi gửi kết bạn
     requestFriends: Array, //Người nhận kb
+    statusOnline: String,
     status: {
       default: "active",
       type: String,

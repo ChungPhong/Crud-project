@@ -488,5 +488,11 @@ i.fa-solid.fa-image {
 .box-user.accepted [btn-accepted-friend] {
   display: inline-block;
 }
-
-/* END box-users  */
+.box-user .inner-status {
+  font-size: 12px;
+  color: #28a745;
+  opacity: 0;
+}
+.box-user .inner-status[status="online"] {
+  opacity: 1;
+} /* END box-users  */
