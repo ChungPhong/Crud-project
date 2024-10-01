@@ -6,10 +6,8 @@ module.exports = async (res) => {
     // Người dùng gửi yêu cầu kết bạn
     socket.on("CLIENT_ADD_FRIEND", async (userId) => {
       const myUserId = res.locals.user.id;
-
       //   console.log(">>>myUserId: ", myUserId); //Id của A
       //   console.log(">>>userId: ", userId); //Id của B
-
       //Thêm id của A vào acceptFriends của B
       const exitsUserAInB = await User.findOne({
         _id: userId,
@@ -49,15 +47,23 @@ module.exports = async (res) => {
         userId: userId,
         lengthAcceptFriends: lengthAcceptFriends,
       });
+
+      //Lấy thông tin của A trả về cho B
+      const infoUserA = await User.findOne({
+        _id: myUserId,
+      }).select("id avatar fullName");
+
+      socket.broadcast.emit("SERVER_RETURN_INFO_ACCPET_FRIEND", {
+        userId: userId,
+        infoUserA: infoUserA,
+      });
     });
 
     // Người dùng hủy gửi yêu cầu kết bạn
     socket.on("CLIENT_CANCEL_FRIEND", async (userId) => {
       const myUserId = res.locals.user.id;
-
       //   console.log(">>>myUserId: ", myUserId); //Id của A
       //   console.log(">>>userId: ", userId); //Id của B
-
       //Xóa id của A vào acceptFriends của B
       const exitsUserAInB = await User.findOne({
         _id: userId,
