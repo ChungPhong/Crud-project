@@ -2,15 +2,18 @@ const User = require("../../models/user.model");
 const chatSocket = require("../../socket/client/chat.socket");
 const Chat = require("../../models/chat.model");
 
-//[GET] /chat/
+//[GET] /chat/:roomChatId
 module.exports.index = async (req, res) => {
+  const roomChatId = req.params.roomChatId;
+  console.log(roomChatId);
   // SocketIo once là kết nối 1 lần duy nhất
-  chatSocket(res);
+  chatSocket(req, res);
   // end SocketIo
 
   // Lấy ra data và in ra giao diện
   const chats = await Chat.find({
     deleted: false,
+    room_chat_id: roomChatId,
   });
 
   for (const chat of chats) {
