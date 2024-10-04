@@ -5,7 +5,6 @@ const Chat = require("../../models/chat.model");
 //[GET] /chat/:roomChatId
 module.exports.index = async (req, res) => {
   const roomChatId = req.params.roomChatId;
-  console.log(roomChatId);
   // SocketIo once là kết nối 1 lần duy nhất
   chatSocket(req, res);
   // end SocketIo
